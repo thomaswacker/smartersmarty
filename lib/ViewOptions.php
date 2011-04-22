@@ -29,6 +29,7 @@ class ViewOptions
     public static $selectOneClass = 'iselectone';
     public static $textClass = 'itext';
     public static $passwordClass = 'itext';
+    public static $textAreaClass = 'itextarea';
     public static $autoAppendInput = '<div class="inputfield">';
     public static $autoPrependInput = '</div>';
     public static $autoAppendField = '';
