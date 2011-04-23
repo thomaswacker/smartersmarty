@@ -30,6 +30,10 @@ class ViewOptions
     public static $textClass = 'itext';
     public static $passwordClass = 'itext';
     public static $textAreaClass = 'itextarea';
+    public static $radioClass = 'iradio';
+    public static $radiosClass = 'iradios';
+    public static $checkboxClass = 'icheckbox';
+    public static $checkboxValue = 1;
     public static $autoAppendInput = '<div class="inputfield">';
     public static $autoPrependInput = '</div>';
     public static $autoAppendField = '';
@@ -44,20 +48,36 @@ class ViewOptions
         self::$wysiwygEditorDir = dirname(__FILE__) . '/ckeditor';
     }
 
-    static public function getDefaultLabelStart($name, $options = array())
+    static public function getDefaultInputStart($name, $options)
     {
-        $result = self::$autoAppendField . '<label';
-        if (isset($options['id'])) {
-            $result .= ' for="' . $options['id'] . '"';
-        } else {
-            $result .= ' for="' . $name . '"';
+        $result = '';
+
+        if (isset($options['label'])) {
+            $result = self::$autoAppendField . '<label';
+            if (isset($options['id'])) {
+                $result .= ' for="' . $options['id'] . '"';
+            } else {
+                $result .= ' for="' . $name . '"';
+            }
+
+            $result .= '>' . htmlentities($options['label'], ENT_QUOTES, 'UTF-8') . '</label>';
         }
 
-        return $result . '>' . htmlentities($options['label'], ENT_QUOTES, 'UTF-8') . '</label>';
+        $result .= ViewOptions::$autoAppendInput;
+
+        return $result;
     }
 
-    static public function getDefaultLabelEnd()
+    static public function getDefaultInputEnd($options)
     {
-        return self::$autoPrependField;        
+        $result = '';
+        
+        if (isset($options['label'])) {
+            $result = self::$autoPrependField;
+        }
+
+        $result .= ViewOptions::$autoPrependInput;
+
+        return $result;
     }
 }

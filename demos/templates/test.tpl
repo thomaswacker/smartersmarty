@@ -32,6 +32,8 @@
 <form method="post" action="test.php">
     {input_selectone label="Select One:" name="test1" id="test1" options=$testoptions value=$test1}
     {input_text label="Text:" name="test2" id="test2" value=$test2 size="30" maxlength="30"}
+    {input_checkbox label="Checkbox" name="checkbox1" id="checkbox1" value="1"}
+    {input_radios label="Radios:" name="testr1" options=$testoptions value=$test1}
     {input_wysiwyg label="WYSIWYG:" name="test3" id="test3" value=$test3}
 
     {input_captcha}

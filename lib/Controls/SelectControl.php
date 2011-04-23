@@ -39,13 +39,8 @@ class SelectControl implements iTemplateControl
     
     public function paint()
     {
-        if (isset($this->_options['label'])) {
-            $result = ViewOptions::getDefaultLabelStart($this->_name, $this->_options);
-        } else {
-            $result = '';
-        }
-
-        $result .= ViewOptions::$autoAppendInput . '<select class="' . ViewOptions::$selectOneClass;
+        $result = ViewOptions::getDefaultInputStart($this->_name, $this->_options)
+                . '<select class="' . ViewOptions::$selectOneClass;
 
         if (isset($this->_options['class'])) {
             $result .= ' ' . $this->_options['class'];
@@ -60,22 +55,18 @@ class SelectControl implements iTemplateControl
 
         $result .= '>';
 
-        $value = isset($this->_options['value']) ? $this->_options['value'] : 0;
-
         if (isset($this->_options['options']) && is_array($this->_options['options'])) {
             foreach ($this->_options['options'] as $val => $text) {
                 $result .= '<option value="' . htmlentities($val, ENT_QUOTES, 'UTF-8') .'"';
-                if ($value == $val) {
+                if ($this->_value == $val) {
                     $result .= ' selected="selected"';
                 }
                 $result .= '>' . htmlentities($text, ENT_QUOTES, 'UTF-8') . '</option>';
             }
         }
 
-        $result .= '</select>' . ViewOptions::$autoPrependInput;
-        if (isset($this->_options['label'])) {
-            $result .= ViewOptions::getDefaultLabelEnd();
-        }
+        $result .= '</select>'
+                 . ViewOptions::getDefaultInputEnd($this->_options);
 
         return $result;
     }

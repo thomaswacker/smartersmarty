@@ -39,14 +39,7 @@ class TextAreaControl implements iTemplateControl
 
     public function paint()
     {
-        if (isset($this->_options['label'])) {
-            $result = ViewOptions::getDefaultLabelStart($this->_name, $this->_options);
-        } else {
-            $result = '';
-        }
-
-        // add default decorations
-        $result .= ViewOptions::$autoAppendInput;
+        $result = ViewOptions::getDefaultInputStart($this->_name, $this->_options);
 
         // start tag with css class
         $result .=  '<textarea class="' . ViewOptions::$textAreaClass;
@@ -65,12 +58,8 @@ class TextAreaControl implements iTemplateControl
         $result .= htmlentities($this->_value, ENT_QUOTES, 'UTF-8');
 
         // end tag with default decorations
-        $result .= '</textarea>';
-        $result .= ViewOptions::$autoPrependInput;
-
-        if (isset($params['label'])) {
-            $result .= ViewOptions::getDefaultLabelEnd();
-        }
+        $result .= '</textarea>'
+                 . ViewOptions::getDefaultInputEnd($this->_options);
 
         return $result;
     }

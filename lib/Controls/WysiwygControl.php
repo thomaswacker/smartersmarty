@@ -36,7 +36,7 @@ class WysiwygControl implements iTemplateControl
     public function paint()
     {
         if (isset($this->_options['label'])) {
-            $result = ViewOptions::getDefaultLabelStart($this->_name, $this->_options);
+            $result = ViewOptions::getDefaultInputStart($this->_name, $this->_options);
         } else {
             $result = '';
         }

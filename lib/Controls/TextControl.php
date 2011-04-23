@@ -41,36 +41,29 @@ class TextControl implements iTemplateControl
 
     public function paint()
     {
-        if (isset($this->_options['label'])) {
-            $result = ViewOptions::getDefaultLabelStart($this->_name, $this->_options);
-        } else {
-            $result = '';
-        }
-
-        // add default decorations
-        $result .= ViewOptions::$autoAppendInput;
+        $result = ViewOptions::getDefaultInputStart($this->_name, $this->_options);
 
         // start tag with css class
         $result .=  '<input type="text" class="' . ViewOptions::$textClass;
         if (isset($this->_options['class'])) {
             $result .= ' ' . $this->_options['class'];
         }
-        $result .= '"';
+
+        $result .= '" value="' . htmlentities($this->_value, ENT_QUOTES, 'UTF-8') . '"';
+        $result .= ' maxlength="' . $this->_maxlength . '"';
 
         // add additional attributes to input field
         foreach ($this->_options as $key => $val) {
-            if ($key != 'class' && $key != 'label') {
+            if ($key != 'class' && $key != 'label' && $key != 'value' && $key != 'maxlength') {
                 $result .= ' ' . $key . '="' . htmlentities($val, ENT_QUOTES, 'UTF-8') . '"';
             }
         }
 
         // end tag with default decorations
         if (ViewOptions::$xhtml) $result .= '/';
-        $result .= '>' . ViewOptions::$autoPrependInput;
+        $result .= '>';
 
-        if (isset($params['label'])) {
-            $result .= ViewOptions::getDefaultLabelEnd();
-        }
+        $result .= ViewOptions::getDefaultInputEnd($this->_options);
 
         return $result;
     }
