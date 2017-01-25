@@ -21,7 +21,7 @@
  * @copyright 2011 Thomas Wacker
  * @author Thomas Wacker <zuhause@thomaswacker.de>
  * @package SmarterSmarty
- * @version 0.1
+ * @version 0.1x
  */
 
 class ViewOptions
